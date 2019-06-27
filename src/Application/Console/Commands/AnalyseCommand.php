@@ -11,6 +11,7 @@ use NunoMaduro\PhpInsights\Application\Console\OutputDecorator;
 use NunoMaduro\PhpInsights\Application\Console\Style;
 use NunoMaduro\PhpInsights\Domain\Contracts\Repositories\FilesRepository;
 use NunoMaduro\PhpInsights\Domain\Kernel;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -81,6 +82,16 @@ final class AnalyseCommand
         if (! $isRootAnalyse) {
             $config = $this->excludeGlobalInsights($config);
         }
+
+        ProgressBar::setPlaceholderFormatterDefinition(
+            'bar',
+            [Style::class, 'loadingBar']
+        );
+        ProgressBar::setFormatDefinition(
+            'normal',
+            ' %current%/%max% %bar% %percent:3s%%'
+        );
+
         $results = $this->analyser->analyse(
             $format,
             $config,
