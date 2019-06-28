@@ -85,7 +85,7 @@ final class AnalyseCommand
 
         ProgressBar::setPlaceholderFormatterDefinition(
             'bar',
-            [Style::class, 'loadingBar']
+            [Style::class, 'loadingBar1']
         );
         ProgressBar::setFormatDefinition(
             'normal',

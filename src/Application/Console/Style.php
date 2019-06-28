@@ -85,12 +85,11 @@ final class Style extends SymfonyStyle
         // Split the array
         $pointer = $bar->getProgress() % $width;
 
+        for ($i = 0; $i < $pointer; $i++) {
+            array_unshift($charArray, array_pop($charArray));
+        }
 
-        $result = array_slice($charArray, $pointer);
-        $result = array_merge($result, array_slice($charArray, 0, $pointer));
-
-
-        return implode("", $result);
+        return implode("", $charArray);
     }
 
     public static $pointer = 0;
@@ -120,7 +119,7 @@ final class Style extends SymfonyStyle
         ];
 
 
-        if ($bar->getProgress() % 2) {
+        if ($bar->getProgress() % 6 === 0) {
             ++self::$pointer;
         }
 
