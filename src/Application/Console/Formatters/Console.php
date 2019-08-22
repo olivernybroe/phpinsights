@@ -315,6 +315,7 @@ EOD;
                 foreach ($details as $detail) {
                     $detailString = null;
                     if ($detail->hasFile()) {
+                        $detailString .= "file://";
                         $detailString .= str_replace(realpath($dir) . '/', '', $detail->getFile());
                     }
 
